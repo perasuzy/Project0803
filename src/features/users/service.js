@@ -28,7 +28,48 @@ const getUsers = async () => {
 
 }
 
+const updateUser = async (id, data) => {
+
+  const userSchema = {
+    name: "string",
+    email: "string"
+  }
+
+  const validateUserType = await Common.checkType(data, userSchema)
+  if (validateUserType) {
+    throw new Error(validateUserType)
+  }
+
+  const user = await User.findByIdAndUpdate(
+    id,
+    { 
+      $set: data,
+      lastUpdateDate: new Date() 
+    },
+    { new: true }
+  )
+
+  if (!user) {
+    throw new Error("User not found")
+  }
+
+  return user
+}
+
+const removeUser = async (id) => {
+
+  const user = await User.findByIdAndDelete(id)
+
+  if (!user) {
+    throw new Error("User not found")
+  }
+
+  return user
+}
+
 module.exports = {
   createUser,
-  getUsers
+  getUsers,
+  updateUser,
+  removeUser
 }

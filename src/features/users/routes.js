@@ -9,8 +9,9 @@ const userSchema = {
     email: "string"
 }
 
-router.post("/", controller.createUser)
-
+router.post("/create", controller.createUser)
+router.put("/update/:id", controller.updateUser)
+router.delete("/remove/:id", controller.removeUser)
 router.get("/", controller.getUsers)
 
 module.exports = router
