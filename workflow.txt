@@ -1,0 +1,3 @@
+app.js -> :[Feature] / routes -> Controller -> Service
+
+how to run //// terminal : node server.js
